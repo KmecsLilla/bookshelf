@@ -1,23 +1,46 @@
-package com.codecool.bookself;
+package com.codecool.bookself.model.bookentity;
+
+import com.codecool.bookself.model.feedback.Rating;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Book {
-   protected String title;
-   protected String author;
-   protected int releaseYear;
-   protected int numberOfPages;
-   protected int weightInGram;
+    private long id;
+    private String title;
+    private Author author;
+    private Genre genre;
+    private int releaseYear;
+    private int numberOfPages;
+    private int weightInGram;
+    private List<Rating> ratings;
 
-    public Book(String title, String author, int releaseYear, int numberOfPages, int weightInGram) {
+    public Book(String title, Author author, Genre genre, int releaseYear, int numberOfPages, int weightInGram) {
         this.title = title;
         this.author = author;
+        this.genre = genre;
         this.releaseYear = releaseYear;
         this.numberOfPages = numberOfPages;
         this.weightInGram = weightInGram;
+        this.ratings = new ArrayList<>();
     }
 
-    public String getAuthor() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Author getAuthor() {
         return author;
     }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
     public int getWeight() {
         return weightInGram;
     }
@@ -28,6 +51,14 @@ public abstract class Book {
 
     public int getNumberOfPages() {
         return numberOfPages;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void addRating(Rating rating) {
+        ratings.add(rating);
     }
 
     public String getBookInfo() {

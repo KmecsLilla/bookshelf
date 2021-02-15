@@ -1,10 +1,13 @@
 package com.codecool.bookself;
 
+import com.codecool.bookself.model.bookentity.Book;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookShelf {
     private List<Book> myBookShelf = new ArrayList<>();
+    private int numberOfAvailableBook;
 
     public void addBook(Book book) {
         myBookShelf.add(book);
@@ -25,8 +28,7 @@ public class BookShelf {
             .filter(book -> book.getReleaseYear() == year)
             .collect(Collectors.toList());
     }
-
-
+    
     public String getLightestAuthor() {
         String result = myBookShelf
             .stream()
@@ -35,7 +37,8 @@ public class BookShelf {
             //.sorted(Comparator.comparingInt(Book::getWeight))
             .findFirst()
             .get()
-            .getAuthor();
+            .getAuthor()
+            .getName();
         return result;
     }
 
@@ -43,9 +46,9 @@ public class BookShelf {
         Map<String,Integer> pagesPerAuthor = new HashMap<>();
         for (Book book : myBookShelf) {
             if (pagesPerAuthor.containsKey(book.getAuthor())) {
-                pagesPerAuthor.put(book.getAuthor(), pagesPerAuthor.get(book.getAuthor()) + book.getNumberOfPages());
+                pagesPerAuthor.put(book.getAuthor().getName(), pagesPerAuthor.get(book.getAuthor()) + book.getNumberOfPages());
             } else {
-                pagesPerAuthor.put(book.getAuthor(), book.getNumberOfPages());
+                pagesPerAuthor.put(book.getAuthor().getName(), book.getNumberOfPages());
             }
         }
         String result = "";
